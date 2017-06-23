@@ -220,7 +220,6 @@
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(167, 213);
             this.outputLabel.TabIndex = 17;
-            this.outputLabel.Text = "label8";
             // 
             // saveQuotesButton
             // 

@@ -30,174 +30,190 @@ namespace QuoteGenerator
         //This entire method is a very verbose chunk of code, that just chooses what text boxes and labels to show based on the construction
         private void constructionComboBox_Click(object sender, EventArgs e)
         {
-            //Once the button is clicked, they are all set to visible
-            quoteButton.Visible = true;
-            widthTextBox.Visible = true;
-            widthLabel.Visible = true;
-            lengthTextBox.Visible = true;
-            lengthLabel.Visible = true;
-            milTextBox.Visible = true;
-            milLabel.Visible = true;
-            quantityTextBox.Visible = true;
-            quantityLabel.Visible = true;
-            priceTextBox.Visible = true;
-            priceLabel.Visible = true;
-
-            //switch statement turns off irrelevant boxes and labels for the bagConstruction
-            switch (constructionComboBox.SelectedItem.ToString())
+            try
             {
-                case "Bottom Seal Bag":
-                    type = "Bag";                   
-                    gussetTextBox.Visible = false;                                                       
-                    gussetLabel.Visible = false;
-                    lipTextBox.Visible = false;
-                    lipLabel.Visible = false;                                     
-                    break;
-                case "Side Gusset Bag":
-                    type = "Bag";
-                    gussetTextBox.Visible = true;
-                    gussetLabel.Visible = true;
-                    lipTextBox.Visible = false;
-                    lipLabel.Visible = false;
-                    break;
-                case "Zipper Bag":
-                    type = "Bag";
-                    gussetTextBox.Visible = false;
-                    gussetLabel.Visible = false;
-                    lipTextBox.Visible = true;
-                    lipLabel.Visible = true;
-                    break;
-                case "Lip & Tape Bag":
-                    type = "Bag";
-                    gussetTextBox.Visible = false;
-                    gussetLabel.Visible = false;
-                    lipTextBox.Visible = true;
-                    lipLabel.Visible = true;
-                    break;
-                case "Tubing Roll":
-                    type = "Roll";
-                    gussetTextBox.Visible = false;
-                    gussetLabel.Visible = false;
-                    lipTextBox.Visible = false;
-                    lipLabel.Visible = false;
-                    break;
-                case "Gusseted Tubing Roll":
-                    type = "Roll";
-                    gussetTextBox.Visible = true;
-                    gussetLabel.Visible = true;
-                    lipTextBox.Visible = false;
-                    lipLabel.Visible = false;
-                    break;
-                default:
-                    outputLabel.Text = "Please enter a valid construction.";
-                    break;
+                //Once the button is clicked, they are all set to visible
+                quoteButton.Visible = true;
+                widthTextBox.Visible = true;
+                widthLabel.Visible = true;
+                lengthTextBox.Visible = true;
+                lengthLabel.Visible = true;
+                milTextBox.Visible = true;
+                milLabel.Visible = true;
+                quantityTextBox.Visible = true;
+                quantityLabel.Visible = true;
+                priceTextBox.Visible = true;
+                priceLabel.Visible = true;
+
+                //switch statement turns off irrelevant boxes and labels for the bagConstruction
+                switch (constructionComboBox.SelectedItem.ToString())
+                {
+                    case "Bottom Seal Bag":
+                        type = "Bag";
+                        gussetTextBox.Visible = false;
+                        gussetLabel.Visible = false;
+                        lipTextBox.Visible = false;
+                        lipLabel.Visible = false;
+                        break;
+                    case "Side Gusset Bag":
+                        type = "Bag";
+                        gussetTextBox.Visible = true;
+                        gussetLabel.Visible = true;
+                        lipTextBox.Visible = false;
+                        lipLabel.Visible = false;
+                        break;
+                    case "Zipper Bag":
+                        type = "Bag";
+                        gussetTextBox.Visible = false;
+                        gussetLabel.Visible = false;
+                        lipTextBox.Visible = true;
+                        lipLabel.Visible = true;
+                        break;
+                    case "Lip & Tape Bag":
+                        type = "Bag";
+                        gussetTextBox.Visible = false;
+                        gussetLabel.Visible = false;
+                        lipTextBox.Visible = true;
+                        lipLabel.Visible = true;
+                        break;
+                    case "Tubing Roll":
+                        type = "Roll";
+                        gussetTextBox.Visible = false;
+                        gussetLabel.Visible = false;
+                        lipTextBox.Visible = false;
+                        lipLabel.Visible = false;
+                        break;
+                    case "Gusseted Tubing Roll":
+                        type = "Roll";
+                        gussetTextBox.Visible = true;
+                        gussetLabel.Visible = true;
+                        lipTextBox.Visible = false;
+                        lipLabel.Visible = false;
+                        break;
+                    default:
+                        outputLabel.Text = "Please enter a valid construction.";
+                        break;
+                }
+                //Resets all values back to empty or 0 each time the bagConstruction button is clicked. 
+                widthTextBox.Text = "";
+                lengthTextBox.Text = "";
+                gussetTextBox.Text = "0";
+                lipTextBox.Text = "0";
+                milTextBox.Text = "";
+                quantityTextBox.Text = "";
+                priceTextBox.Text = "";
+                outputLabel.Text = "";
             }
-            //Resets all values back to empty or 0 each time the bagConstruction button is clicked. 
-            widthTextBox.Text = "";
-            lengthTextBox.Text = "";
-            gussetTextBox.Text = "0";
-            lipTextBox.Text = "0";
-            milTextBox.Text = "";
-            quantityTextBox.Text = "";
-            priceTextBox.Text = "";
+            catch(NullReferenceException nr)
+            {
+                outputLabel.Text = "Please select an option from the drop down menu.";
+            }
         }
         private void quoteButton_Click(object sender, EventArgs e)
         {
-            //Declare variables
-            //bagConstruction will end up in results array
-            string bagConstruction = constructionComboBox.SelectedItem.ToString();
-           
-            //totalWeight will be calculated with custom methods below, based on bagConstruction
-            double totalWeight = 0;
-            
-            //this data is where all the user inputed data will be stored, so that it can easily be passed through a method as a single argument
-            double[] data = new double[6];
-            //GetItemData collects user input and assigns the data to the data array. This array should be emptied every 
-            //time the button is clicked, and is only accessed from within the click button method so I've declared it 
-            //within the method instead of outside the method.
-            data = GetItemData();
-
-            //This is where the results will results will write to at the end of the quoteButton_Click() method
-            string outputText;
-
-            //This is the target price per pound for the quote.
-            double priceNum = Convert.ToDouble(priceTextBox.Text);
-
-            //This the total sale amount for the quote. 
-            double totalSaleNum;
-
-            //Convert data[] array to variable Strings for both outputText, and results[] arrya
-            string width, gusset, length, lip, mil, qty, price, totalSale;
-            width = data[0].ToString();
-            gusset = data[1].ToString();
-            length = data[2].ToString();
-            lip = data[3].ToString();
-            mil = (data[4] / 1000).ToString();
-            qty = data[5].ToString();
-            price = priceNum.ToString("C");
-        
-
-           //determine which method is appropraite for the bag construction
-            if (type == "Bag")
+            try
             {
-                totalWeight = BagCalculator(data);
+                //Declare variables
+                //bagConstruction will end up in results array
+                string bagConstruction = constructionComboBox.SelectedItem.ToString();
+
+                //totalWeight will be calculated with custom methods below, based on bagConstruction
+                double totalWeight = 0;
+
+                //this data is where all the user inputed data will be stored, so that it can easily be passed through a method as a single argument
+                double[] data = new double[6];
+                //GetItemData collects user input and assigns the data to the data array. This array should be emptied every 
+                //time the button is clicked, and is only accessed from within the click button method so I've declared it 
+                //within the method instead of outside the method.
+                data = GetItemData();              
+                
+                //This is where the results will results will write to at the end of the quoteButton_Click() method
+                string outputText;
+
+                //This is the target price per pound for the quote.
+                double priceNum = Convert.ToDouble(priceTextBox.Text);
+
+                //This the total sale amount for the quote. 
+                double totalSaleNum;
+
+                //Convert data[] array to variable Strings for both outputText, and results[] arrya
+                string width, gusset, length, lip, mil, qty, price, totalSale;
+                width = data[0].ToString();
+                gusset = data[1].ToString();
+                length = data[2].ToString();
+                lip = data[3].ToString();
+                mil = (data[4] / 1000).ToString();
+                qty = data[5].ToString();
+                price = priceNum.ToString("C");
+
+
+                //determine which method is appropraite for the bag construction                
+                    if (type == "Bag")
+                    {
+                        totalWeight = BagCalculator(data);
+                    }
+                    else if (type == "Roll")
+                    {
+                        totalWeight = RollCalculator(data);
+                    }
+              
+
+                //Calculate total sale price
+                totalSaleNum = priceNum * totalWeight;
+                //Get sale price as a string
+                totalSale = totalSaleNum.ToString("C");
+
+                //based on bagConstrucion, the outputText is different. 
+                switch (bagConstruction)
+                {
+                    case "Bottom Seal Bag":
+                        outputText = String.Format("{0}\n{1}\"x{2}\"x{3}\n{4} Total for {5} units at {6} per pound", bagConstruction, width, length, mil, totalSale, qty, price);
+                        break;
+                    case "Side Gusset Bag":
+                        outputText = String.Format("{0}\n{1}\"x{2}\"x{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, gusset, length, mil, totalSale, qty, price);
+                        break;
+                    case "Zipper Bag":
+                        outputText = String.Format("{0}\n{1}\"x{2}\"+{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, length, lip, mil, totalSale, qty, price);
+                        break;
+                    case "Lip & Tape Bag":
+                        outputText = String.Format("{0}\n{1}\"x{2}\"+{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, length, lip, mil, totalSale, qty, price);
+                        break;
+                    case "Tubing Roll":
+                        outputText = String.Format("{0}\n{1}\"x{2}'x{3}\n{4} Total for {5} units at {6} per pound", bagConstruction, width, length, mil, totalSale, qty, price);
+                        break;
+                    case "Gusseted Tubing Roll":
+                        outputText = String.Format("{0}\n{1}\"x{2}\"x{3}'x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, gusset, length, mil, totalSale, qty, price);
+                        break;
+                    default:
+                        outputText = "Try again";
+                        break;
+                }
+                outputLabel.Text = outputText;
+
+                //Declare and initialize all quote data to be passed through the 
+                //SendToResults() method, which uses a loop to write all this data into a multidimensional array;
+                string[] quoteData = new string[10] { width, gusset, length, lip, mil, qty, price, totalWeight.ToString(), totalSale, bagConstruction };
+                /*
+                 quote data array is:
+                 0: width
+                 1: gusset
+                 2: length
+                 3: lip
+                 4: mil
+                 5: qty
+                 6: price (price per pound)
+                 7: totalWeight
+                 8: total Sale   
+                 9: bagConstruction                    
+                 */
+                //Send array to multidimensional results[,] array.
+                SendToResults(quoteData);
+                ++quoteNum;
             }
-            else if (type == "Roll")
+            catch(FormatException fe)
             {
-                totalWeight = RollCalculator(data);
+                outputLabel.Text = "Whoops! You need to put numbers in all of the required fields to the left.";
             }
-
-            //Calculate total sale price
-            totalSaleNum = priceNum * totalWeight;
-            //Get sale price as a string
-            totalSale = totalSaleNum.ToString("C");
-
-            //based on bagConstrucion, the outputText is different. 
-            switch (bagConstruction)
-            {
-                case "Bottom Seal Bag":
-                    outputText = String.Format("{0}\n{1}\"x{2}\"x{3}\n{4} Total for {5} units at {6} per pound", bagConstruction, width, length, mil, totalSale, qty, price);
-                    break;
-                case "Side Gusset Bag":
-                    outputText = String.Format("{0}\n{1}\"x{2}\"x{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, gusset, length, mil, totalSale, qty, price);
-                    break;
-                case "Zipper Bag":
-                    outputText = String.Format("{0}\n{1}\"x{2}\"+{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, length, lip, mil, totalSale, qty, price);
-                    break;
-                case "Lip & Tape Bag":
-                    outputText = String.Format("{0}\n{1}\"x{2}\"+{3}\"x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, length, lip, mil, totalSale, qty, price);
-                    break;
-                case "Tubing Roll":
-                    outputText = String.Format("{0}\n{1}\"x{2}'x{3}\n{4} Total for {5} units at {6} per pound", bagConstruction, width, length, mil, totalSale, qty, price);
-                    break;
-                case "Gusseted Tubing Roll":
-                    outputText = String.Format("{0}\n{1}\"x{2}\"x{3}'x{4}\n{5} Total for {6} units at {7} per pound", bagConstruction, width, gusset, length, mil, totalSale, qty, price);
-                    break;
-                default:
-                    outputText = "Try again";
-                    break;
-            }
-            outputLabel.Text = outputText;
-
-            //Declare and initialize all quote data to be passed through the 
-            //SendToResults() method, which uses a loop to write all this data into a multidimensional array;
-            string[] quoteData = new string[10] {width, gusset, length, lip, mil, qty, price, totalWeight.ToString(), totalSale, bagConstruction };
-            /*
-             quote data array is:
-             0: width
-             1: gusset
-             2: length
-             3: lip
-             4: mil
-             5: qty
-             6: price (price per pound)
-             7: totalWeight
-             8: total Sale   
-             9: bagConstruction                    
-             */
-             //Send array to multidimensional results[,] array.
-            SendToResults(quoteData);
-            ++quoteNum;
         }
 
         
