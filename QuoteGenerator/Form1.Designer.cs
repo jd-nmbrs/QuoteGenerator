@@ -256,7 +256,7 @@
             this.Controls.Add(this.constructionButton);
             this.Controls.Add(this.constructionComboBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Quote Generator";
             this.ResumeLayout(false);
             this.PerformLayout();
 

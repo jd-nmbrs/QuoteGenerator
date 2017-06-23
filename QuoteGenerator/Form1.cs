@@ -107,6 +107,17 @@ namespace QuoteGenerator
             catch(NullReferenceException nr)
             {
                 outputLabel.Text = "Please select an option from the drop down menu.";
+                quoteButton.Visible = false;
+                widthTextBox.Visible = false;
+                widthLabel.Visible = false;
+                lengthTextBox.Visible = false;
+                lengthLabel.Visible = false;
+                milTextBox.Visible = false;
+                milLabel.Visible = false;
+                quantityTextBox.Visible = false;
+                quantityLabel.Visible = false;
+                priceTextBox.Visible = false;
+                priceLabel.Visible = false;
             }
         }
         private void quoteButton_Click(object sender, EventArgs e)
@@ -190,23 +201,24 @@ namespace QuoteGenerator
                 }
                 outputLabel.Text = outputText;
 
-                //Declare and initialize all quote data to be passed through the 
-                //SendToResults() method, which uses a loop to write all this data into a multidimensional array;
+                /* Declare and initialize all quote data to be passed through the 
+                SendToResults() method, which uses a loop to write all this data into a multidimensional array*/ 
+
                 string[] quoteData = new string[10] { width, gusset, length, lip, mil, qty, price, totalWeight.ToString(), totalSale, bagConstruction };
-                /*
-                 quote data array is:
-                 0: width
-                 1: gusset
-                 2: length
-                 3: lip
-                 4: mil
-                 5: qty
-                 6: price (price per pound)
-                 7: totalWeight
-                 8: total Sale   
-                 9: bagConstruction                    
-                 */
-                //Send array to multidimensional results[,] array.
+                
+                /* Legend for quoteData[] is:
+                     0: width
+                     1: gusset
+                     2: length
+                     3: lip
+                     4: mil
+                     5: qty
+                     6: price (price per pound)
+                     7: totalWeight
+                     8: total Sale   
+                     9: bagConstruction                    
+                 
+                Send array to multidimensional results[,] array.*/
                 SendToResults(quoteData);
                 ++quoteNum;
             }
@@ -219,21 +231,19 @@ namespace QuoteGenerator
         
         private double[] GetItemData()
         {
-            //This Method grabs all the user data and returns it as an array to be passed into either of the calculator methods
-           
-            /*
-            Legend for data array records:
+            /*This Method grabs all the user data and returns it as an array to be passed into either of the calculator methods
+             * Legend for data array records:
             0: Width
             1: Gusset
             2: Length
             3: Lip
             4: mil
             5: Quantity
-            
-             */
-            //The calculator needs them all as doubles, so all of the text is converted to doubles here.
-            //NOTE: THIS DOES NOT GRAB THE PRICE TEXT. The price per pound does not need to go into the claculator
-            //methods so the price is grabbed separately within the Main() method.
+
+            The calculator methods needs them all as doubles, so all of the text is converted to doubles here.
+            ***NOTE*** THIS DOES NOT GRAB THE PRICE TEXT. The price per pound does not need to go into the claculator
+            methods so the price is grabbed separately within the Main() method.*/
+
             double width = Convert.ToDouble(widthTextBox.Text);
             double gusset = Convert.ToDouble(gussetTextBox.Text);
             double length = Convert.ToDouble(lengthTextBox.Text);
@@ -276,14 +286,6 @@ namespace QuoteGenerator
         //Method that takes the quote results and sends them to the results[,] array
         private void SendToResults(string[] quoteData)
         {
-            /* for(int numQuotes = 0; numQuotes < 25; ++numQuotes)
-            {
-
-                for (int itemRecord = 0; itemRecord < quoteData.Length; ++itemRecord)
-                {
-                    results[numQuotes, itemRecord] = quoteData[itemRecord];
-                }
-            }*/
             for(int itemRecord = 0; itemRecord < quoteData.Length; ++itemRecord)
             {
                 results[quoteNum, itemRecord] = quoteData[itemRecord];
