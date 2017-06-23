@@ -31,19 +31,9 @@ namespace QuoteGenerator
         private void constructionComboBox_Click(object sender, EventArgs e)
         {
             try
-            {
-                //Once the button is clicked, they are all set to visible
-                quoteButton.Visible = true;
-                widthTextBox.Visible = true;
-                widthLabel.Visible = true;
-                lengthTextBox.Visible = true;
-                lengthLabel.Visible = true;
-                milTextBox.Visible = true;
-                milLabel.Visible = true;
-                quantityTextBox.Visible = true;
-                quantityLabel.Visible = true;
-                priceTextBox.Visible = true;
-                priceLabel.Visible = true;
+            {               
+                TextBoxVisible(true);
+                ClearText();
 
                 //switch statement turns off irrelevant boxes and labels for the bagConstruction
                 switch (constructionComboBox.SelectedItem.ToString())
@@ -51,73 +41,54 @@ namespace QuoteGenerator
                     case "Bottom Seal Bag":
                         type = "Bag";
                         gussetTextBox.Visible = false;
+                        gussetTextBox.Text = "0";
                         gussetLabel.Visible = false;
                         lipTextBox.Visible = false;
+                        lipTextBox.Text = "0";
                         lipLabel.Visible = false;
                         break;
                     case "Side Gusset Bag":
                         type = "Bag";
-                        gussetTextBox.Visible = true;
-                        gussetLabel.Visible = true;
                         lipTextBox.Visible = false;
+                        lipTextBox.Text = "0";
                         lipLabel.Visible = false;
                         break;
                     case "Zipper Bag":
                         type = "Bag";
                         gussetTextBox.Visible = false;
                         gussetLabel.Visible = false;
-                        lipTextBox.Visible = true;
-                        lipLabel.Visible = true;
+                        gussetTextBox.Text = "0";
                         break;
                     case "Lip & Tape Bag":
                         type = "Bag";
                         gussetTextBox.Visible = false;
                         gussetLabel.Visible = false;
-                        lipTextBox.Visible = true;
-                        lipLabel.Visible = true;
+                        gussetTextBox.Text = "0";
                         break;
                     case "Tubing Roll":
                         type = "Roll";
                         gussetTextBox.Visible = false;
                         gussetLabel.Visible = false;
+                        gussetTextBox.Text = "0";
                         lipTextBox.Visible = false;
+                        lipTextBox.Text = "0";
                         lipLabel.Visible = false;
                         break;
                     case "Gusseted Tubing Roll":
                         type = "Roll";
-                        gussetTextBox.Visible = true;
-                        gussetLabel.Visible = true;
                         lipTextBox.Visible = false;
                         lipLabel.Visible = false;
+                        lipTextBox.Text = "0";
                         break;
                     default:
                         outputLabel.Text = "Please enter a valid construction.";
                         break;
                 }
-                //Resets all values back to empty or 0 each time the bagConstruction button is clicked. 
-                widthTextBox.Text = "";
-                lengthTextBox.Text = "";
-                gussetTextBox.Text = "0";
-                lipTextBox.Text = "0";
-                milTextBox.Text = "";
-                quantityTextBox.Text = "";
-                priceTextBox.Text = "";
-                outputLabel.Text = "";
             }
-            catch(NullReferenceException nr)
+            catch(NullReferenceException)
             {
-                outputLabel.Text = "Please select an option from the drop down menu.";
-                quoteButton.Visible = false;
-                widthTextBox.Visible = false;
-                widthLabel.Visible = false;
-                lengthTextBox.Visible = false;
-                lengthLabel.Visible = false;
-                milTextBox.Visible = false;
-                milLabel.Visible = false;
-                quantityTextBox.Visible = false;
-                quantityLabel.Visible = false;
-                priceTextBox.Visible = false;
-                priceLabel.Visible = false;
+                outputLabel.Text = "Please select an option from the drop down menu.";         
+                TextBoxVisible(false);
             }
         }
         private void quoteButton_Click(object sender, EventArgs e)
@@ -221,17 +192,9 @@ namespace QuoteGenerator
                 Send array to multidimensional results[,] array.*/
                 SendToResults(quoteData);
                 ++quoteNum;
-
-                //Resets all values back to empty or 0 each time the bagConstruction button is clicked. 
-                widthTextBox.Text = "";
-                lengthTextBox.Text = "";
-                gussetTextBox.Text = "";
-                lipTextBox.Text = "";
-                milTextBox.Text = "";
-                quantityTextBox.Text = "";
-                priceTextBox.Text = "";
+                ClearText();
             }
-            catch(FormatException fe)
+            catch(FormatException)
             {
                 outputLabel.Text = "Whoops! You need to put numbers in all of the required fields to the left.";
             }
@@ -331,6 +294,31 @@ namespace QuoteGenerator
             }
             writer.Close();
             fs.Close();
+        }
+        private void ClearText()
+        {
+            widthTextBox.Text = "";
+            lengthTextBox.Text = "";
+            gussetTextBox.Text = "";
+            lipTextBox.Text = "";
+            milTextBox.Text = "";
+            quantityTextBox.Text = "";
+            priceTextBox.Text = "";
+            outputLabel.Text = "";
+        }
+        private void TextBoxVisible(bool vis)
+        {
+            quoteButton.Visible = vis;
+            widthTextBox.Visible = vis;
+            widthLabel.Visible = vis;
+            lengthTextBox.Visible = vis;
+            lengthLabel.Visible = vis;
+            milTextBox.Visible = vis;
+            milLabel.Visible = vis;
+            quantityTextBox.Visible = vis;
+            quantityLabel.Visible = vis;
+            priceTextBox.Visible = vis;
+            priceLabel.Visible = vis;
         }
     }
 }
