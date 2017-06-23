@@ -1,0 +1,9 @@
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\bin\Debug\QuoteGenerator.exe.config
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\bin\Debug\QuoteGenerator.exe
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\bin\Debug\QuoteGenerator.pdb
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.csprojResolveAssemblyReference.cache
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.Form1.resources
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.Properties.Resources.resources
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.csproj.GenerateResource.Cache
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.exe
+\\mac\home\documents\visual studio 2015\Projects\QuoteGenerator\QuoteGenerator\obj\Debug\QuoteGenerator.pdb
