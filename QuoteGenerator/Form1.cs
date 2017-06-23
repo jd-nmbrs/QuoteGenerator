@@ -221,6 +221,15 @@ namespace QuoteGenerator
                 Send array to multidimensional results[,] array.*/
                 SendToResults(quoteData);
                 ++quoteNum;
+
+                //Resets all values back to empty or 0 each time the bagConstruction button is clicked. 
+                widthTextBox.Text = "";
+                lengthTextBox.Text = "";
+                gussetTextBox.Text = "";
+                lipTextBox.Text = "";
+                milTextBox.Text = "";
+                quantityTextBox.Text = "";
+                priceTextBox.Text = "";
             }
             catch(FormatException fe)
             {

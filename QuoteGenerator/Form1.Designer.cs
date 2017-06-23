@@ -48,6 +48,8 @@
             this.outputLabel = new System.Windows.Forms.Label();
             this.saveQuotesButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // constructionComboBox
@@ -60,14 +62,14 @@
             "Lip & Tape Bag",
             "Tubing Roll",
             "Gusseted Tubing Roll"});
-            this.constructionComboBox.Location = new System.Drawing.Point(26, 13);
+            this.constructionComboBox.Location = new System.Drawing.Point(22, 109);
             this.constructionComboBox.Name = "constructionComboBox";
             this.constructionComboBox.Size = new System.Drawing.Size(121, 21);
             this.constructionComboBox.TabIndex = 0;
             // 
             // constructionButton
             // 
-            this.constructionButton.Location = new System.Drawing.Point(168, 13);
+            this.constructionButton.Location = new System.Drawing.Point(164, 109);
             this.constructionButton.Name = "constructionButton";
             this.constructionButton.Size = new System.Drawing.Size(75, 23);
             this.constructionButton.TabIndex = 1;
@@ -77,7 +79,7 @@
             // 
             // widthTextBox
             // 
-            this.widthTextBox.Location = new System.Drawing.Point(26, 64);
+            this.widthTextBox.Location = new System.Drawing.Point(24, 177);
             this.widthTextBox.Name = "widthTextBox";
             this.widthTextBox.Size = new System.Drawing.Size(100, 20);
             this.widthTextBox.TabIndex = 2;
@@ -85,7 +87,7 @@
             // 
             // gussetTextBox
             // 
-            this.gussetTextBox.Location = new System.Drawing.Point(144, 64);
+            this.gussetTextBox.Location = new System.Drawing.Point(142, 177);
             this.gussetTextBox.Name = "gussetTextBox";
             this.gussetTextBox.Size = new System.Drawing.Size(100, 20);
             this.gussetTextBox.TabIndex = 3;
@@ -94,7 +96,7 @@
             // widthLabel
             // 
             this.widthLabel.AutoSize = true;
-            this.widthLabel.Location = new System.Drawing.Point(26, 45);
+            this.widthLabel.Location = new System.Drawing.Point(24, 158);
             this.widthLabel.Name = "widthLabel";
             this.widthLabel.Size = new System.Drawing.Size(35, 13);
             this.widthLabel.TabIndex = 4;
@@ -104,7 +106,7 @@
             // gussetLabel
             // 
             this.gussetLabel.AutoSize = true;
-            this.gussetLabel.Location = new System.Drawing.Point(141, 45);
+            this.gussetLabel.Location = new System.Drawing.Point(139, 158);
             this.gussetLabel.Name = "gussetLabel";
             this.gussetLabel.Size = new System.Drawing.Size(40, 13);
             this.gussetLabel.TabIndex = 5;
@@ -114,7 +116,7 @@
             // lipLabel
             // 
             this.lipLabel.AutoSize = true;
-            this.lipLabel.Location = new System.Drawing.Point(141, 94);
+            this.lipLabel.Location = new System.Drawing.Point(139, 207);
             this.lipLabel.Name = "lipLabel";
             this.lipLabel.Size = new System.Drawing.Size(21, 13);
             this.lipLabel.TabIndex = 9;
@@ -124,7 +126,7 @@
             // lengthLabel
             // 
             this.lengthLabel.AutoSize = true;
-            this.lengthLabel.Location = new System.Drawing.Point(26, 94);
+            this.lengthLabel.Location = new System.Drawing.Point(24, 207);
             this.lengthLabel.Name = "lengthLabel";
             this.lengthLabel.Size = new System.Drawing.Size(40, 13);
             this.lengthLabel.TabIndex = 8;
@@ -133,7 +135,7 @@
             // 
             // lipTextBox
             // 
-            this.lipTextBox.Location = new System.Drawing.Point(144, 113);
+            this.lipTextBox.Location = new System.Drawing.Point(142, 226);
             this.lipTextBox.Name = "lipTextBox";
             this.lipTextBox.Size = new System.Drawing.Size(100, 20);
             this.lipTextBox.TabIndex = 7;
@@ -141,7 +143,7 @@
             // 
             // lengthTextBox
             // 
-            this.lengthTextBox.Location = new System.Drawing.Point(26, 113);
+            this.lengthTextBox.Location = new System.Drawing.Point(24, 226);
             this.lengthTextBox.Name = "lengthTextBox";
             this.lengthTextBox.Size = new System.Drawing.Size(100, 20);
             this.lengthTextBox.TabIndex = 6;
@@ -150,7 +152,7 @@
             // quantityLabel
             // 
             this.quantityLabel.AutoSize = true;
-            this.quantityLabel.Location = new System.Drawing.Point(141, 143);
+            this.quantityLabel.Location = new System.Drawing.Point(139, 256);
             this.quantityLabel.Name = "quantityLabel";
             this.quantityLabel.Size = new System.Drawing.Size(46, 13);
             this.quantityLabel.TabIndex = 13;
@@ -160,7 +162,7 @@
             // milLabel
             // 
             this.milLabel.AutoSize = true;
-            this.milLabel.Location = new System.Drawing.Point(26, 143);
+            this.milLabel.Location = new System.Drawing.Point(24, 256);
             this.milLabel.Name = "milLabel";
             this.milLabel.Size = new System.Drawing.Size(20, 13);
             this.milLabel.TabIndex = 12;
@@ -169,7 +171,7 @@
             // 
             // quantityTextBox
             // 
-            this.quantityTextBox.Location = new System.Drawing.Point(144, 162);
+            this.quantityTextBox.Location = new System.Drawing.Point(142, 275);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
             this.quantityTextBox.TabIndex = 11;
@@ -177,7 +179,7 @@
             // 
             // milTextBox
             // 
-            this.milTextBox.Location = new System.Drawing.Point(26, 162);
+            this.milTextBox.Location = new System.Drawing.Point(24, 275);
             this.milTextBox.Name = "milTextBox";
             this.milTextBox.Size = new System.Drawing.Size(100, 20);
             this.milTextBox.TabIndex = 10;
@@ -186,7 +188,7 @@
             // priceLabel
             // 
             this.priceLabel.AutoSize = true;
-            this.priceLabel.Location = new System.Drawing.Point(23, 196);
+            this.priceLabel.Location = new System.Drawing.Point(21, 309);
             this.priceLabel.Name = "priceLabel";
             this.priceLabel.Size = new System.Drawing.Size(84, 13);
             this.priceLabel.TabIndex = 15;
@@ -196,7 +198,7 @@
             // 
             // priceTextBox
             // 
-            this.priceTextBox.Location = new System.Drawing.Point(26, 215);
+            this.priceTextBox.Location = new System.Drawing.Point(24, 328);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(100, 20);
             this.priceTextBox.TabIndex = 14;
@@ -205,7 +207,7 @@
             // 
             // quoteButton
             // 
-            this.quoteButton.Location = new System.Drawing.Point(141, 212);
+            this.quoteButton.Location = new System.Drawing.Point(139, 325);
             this.quoteButton.Name = "quoteButton";
             this.quoteButton.Size = new System.Drawing.Size(100, 23);
             this.quoteButton.TabIndex = 16;
@@ -216,7 +218,7 @@
             // 
             // outputLabel
             // 
-            this.outputLabel.Location = new System.Drawing.Point(274, 22);
+            this.outputLabel.Location = new System.Drawing.Point(274, 109);
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(167, 213);
             this.outputLabel.TabIndex = 17;
@@ -231,11 +233,20 @@
             this.saveQuotesButton.UseVisualStyleBackColor = true;
             this.saveQuotesButton.Click += new System.EventHandler(this.saveQuotesButton_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(22, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 360);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.saveQuotesButton);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.quoteButton);
@@ -257,6 +268,7 @@
             this.Controls.Add(this.constructionComboBox);
             this.Name = "Form1";
             this.Text = "Quote Generator";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,6 +296,7 @@
         private System.Windows.Forms.Label outputLabel;
         private System.Windows.Forms.Button saveQuotesButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
