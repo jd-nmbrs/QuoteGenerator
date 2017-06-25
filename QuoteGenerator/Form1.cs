@@ -24,63 +24,58 @@ namespace QuoteGenerator
 
         
         string type = "";
-        string[,] results = new string[25, 10];
+        const int totalNumberOfQuotes = 25;
+        string[,] results = new string[totalNumberOfQuotes, 10];
         int quoteNum = 0;
+        
 
-        //This entire method is a very verbose chunk of code, that just chooses what text boxes and labels to show based on the construction
         private void constructionComboBox_Click(object sender, EventArgs e)
         {
             try
-            {               
+            {
+                //Sets the .Visible property of all the text boxts to whatever boolean value is passed throught the method.
                 TextBoxVisible(true);
+                //Clears the values the .Text properties of all text boxes onthe form.
                 ClearText();
 
                 //switch statement turns off irrelevant boxes and labels for the bagConstruction
                 switch (constructionComboBox.SelectedItem.ToString())
                 {
                     case "Bottom Seal Bag":
+                        //Sets type to bag, hides the Gusset and Lip controls, while also putting the 0 value in the .Text property.
+                        //The 0 value must be present for any hidden components to prevent a false Null Reference exception.
                         type = "Bag";
-                        gussetTextBox.Visible = false;
-                        gussetTextBox.Text = "0";
-                        gussetLabel.Visible = false;
-                        lipTextBox.Visible = false;
-                        lipTextBox.Text = "0";
-                        lipLabel.Visible = false;
+                        HideGussetControls();
+                        HideLipControls();
                         break;
                     case "Side Gusset Bag":
+                        //Sets type to bag and hides the Lip controls
                         type = "Bag";
-                        lipTextBox.Visible = false;
-                        lipTextBox.Text = "0";
-                        lipLabel.Visible = false;
+                        HideLipControls();
                         break;
                     case "Zipper Bag":
+                        //Sets type to bag and hides the Gusset controls
                         type = "Bag";
-                        gussetTextBox.Visible = false;
-                        gussetLabel.Visible = false;
-                        gussetTextBox.Text = "0";
+                        HideGussetControls();
                         break;
                     case "Lip & Tape Bag":
+                        //Sets the type to bag and hides the Gusset Controls
                         type = "Bag";
-                        gussetTextBox.Visible = false;
-                        gussetLabel.Visible = false;
-                        gussetTextBox.Text = "0";
+                        HideGussetControls();
                         break;
                     case "Tubing Roll":
+                        //Sets type to roll and hired the gusset and lip controls
                         type = "Roll";
-                        gussetTextBox.Visible = false;
-                        gussetLabel.Visible = false;
-                        gussetTextBox.Text = "0";
-                        lipTextBox.Visible = false;
-                        lipTextBox.Text = "0";
-                        lipLabel.Visible = false;
+                        HideGussetControls();
+                        HideLipControls();
                         break;
                     case "Gusseted Tubing Roll":
+                        //Sets type to roll and hides the lips controls
                         type = "Roll";
-                        lipTextBox.Visible = false;
-                        lipLabel.Visible = false;
-                        lipTextBox.Text = "0";
+                        HideLipControls();
                         break;
                     default:
+                        //In case someone tries to enter their own text in the combo box
                         outputLabel.Text = "Please enter a valid construction.";
                         break;
                 }
@@ -115,8 +110,7 @@ namespace QuoteGenerator
                 //This is the target price per pound for the quote.
                 double priceNum = Convert.ToDouble(priceTextBox.Text);
 
-                //This the total sale amount for the quote. 
-                double totalSaleNum;
+               
 
                 //Convert data[] array to variable Strings for both outputText, and results[] arrya
                 string width, gusset, length, lip, mil, qty, price, totalSale;
@@ -138,12 +132,9 @@ namespace QuoteGenerator
                     {
                         totalWeight = RollCalculator(data);
                     }
-              
-
-                //Calculate total sale price
-                totalSaleNum = priceNum * totalWeight;
+            
                 //Get sale price as a string
-                totalSale = totalSaleNum.ToString("C");
+                totalSale =(priceNum * totalWeight).ToString("C");
 
                 //based on bagConstrucion, the outputText is different. 
                 switch (bagConstruction)
@@ -274,7 +265,7 @@ namespace QuoteGenerator
             FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(fs);
 
-            for(int quoteNum = 0; quoteNum < 25; ++quoteNum)
+            for(int quoteNum = 0; quoteNum < totalNumberOfQuotes; ++quoteNum)
             {
                 if (results[quoteNum, 0] != null) 
                 {
@@ -304,7 +295,6 @@ namespace QuoteGenerator
             milTextBox.Text = "";
             quantityTextBox.Text = "";
             priceTextBox.Text = "";
-            outputLabel.Text = "";
         }
         private void TextBoxVisible(bool vis)
         {
@@ -319,6 +309,22 @@ namespace QuoteGenerator
             quantityLabel.Visible = vis;
             priceTextBox.Visible = vis;
             priceLabel.Visible = vis;
+            gussetTextBox.Visible = vis;
+            gussetLabel.Visible = vis;
+            lipTextBox.Visible = vis;
+            lipLabel.Visible = vis;
+        }
+        private void HideGussetControls()
+        {
+            gussetTextBox.Visible = false;
+            gussetTextBox.Text = "0";
+            gussetLabel.Visible = false;
+        }
+        private void HideLipControls()
+        {
+            lipTextBox.Visible = false;
+            lipTextBox.Text = "0";
+            lipLabel.Visible = false;
         }
     }
 }
