@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
 namespace QuoteGenerator
 {
-    
+
 
 
     public partial class Form1 : Form
@@ -98,12 +91,15 @@ namespace QuoteGenerator
                 double totalWeight = 0;
 
                 //this data is where all the user inputed data will be stored, so that it can easily be passed through a method as a single argument
+                string[] dataStrings = new string[6];
                 double[] data = new double[6];
                 //GetItemData collects user input and assigns the data to the data array. This array should be emptied every 
                 //time the button is clicked, and is only accessed from within the click button method so I've declared it 
                 //within the method instead of outside the method.
-                data = GetItemData();              
-                
+                dataStrings = GetItemData();
+                data = Array.ConvertAll(dataStrings, new Converter<string, double>(StringToDouble));
+
+
                 //This is where the results will results will write to at the end of the quoteButton_Click() method
                 string outputText;
 
@@ -192,7 +188,7 @@ namespace QuoteGenerator
         }
 
         
-        private double[] GetItemData()
+        private string[] GetItemData()
         {
             /*This Method grabs all the user data and returns it as an array to be passed into either of the calculator methods
              * Legend for data array records:
@@ -206,15 +202,15 @@ namespace QuoteGenerator
             The calculator methods needs them all as doubles, so all of the text is converted to doubles here.
             ***NOTE*** THIS DOES NOT GRAB THE PRICE TEXT. The price per pound does not need to go into the claculator
             methods so the price is grabbed separately within the Main() method.*/
-
-            double width = Convert.ToDouble(widthTextBox.Text);
-            double gusset = Convert.ToDouble(gussetTextBox.Text);
-            double length = Convert.ToDouble(lengthTextBox.Text);
-            double lip = Convert.ToDouble(lipTextBox.Text);
-            double mil = Convert.ToDouble(milTextBox.Text);
-            double qty = Convert.ToDouble(quantityTextBox.Text);
-            double[] itemData = new double[6] { width, gusset, length, lip, mil, qty };
-            return itemData;
+            string width, gusset, length, lip, mil, qty;
+            width = widthTextBox.Text;
+            gusset = gussetTextBox.Text;
+            length = lengthTextBox.Text;
+            lip = lipTextBox.Text;
+            mil = milTextBox.Text;
+            qty = quantityTextBox.Text;
+            string[] itemDataStrings = new string[6] { width, gusset, length, lip, mil, qty };
+            return itemDataStrings;
         }
 
         
@@ -325,6 +321,11 @@ namespace QuoteGenerator
             lipTextBox.Visible = false;
             lipTextBox.Text = "0";
             lipLabel.Visible = false;
+        }
+        public static double StringToDouble(string input)
+        {
+            double output = Convert.ToDouble(input);
+            return output;
         }
     }
 }
