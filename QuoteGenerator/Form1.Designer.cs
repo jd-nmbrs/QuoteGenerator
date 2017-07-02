@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.constructionComboBox = new System.Windows.Forms.ComboBox();
             this.constructionButton = new System.Windows.Forms.Button();
             this.widthTextBox = new System.Windows.Forms.TextBox();
@@ -66,6 +67,8 @@
             this.constructionComboBox.Name = "constructionComboBox";
             this.constructionComboBox.Size = new System.Drawing.Size(121, 21);
             this.constructionComboBox.TabIndex = 0;
+            this.constructionComboBox.TabStop = false;
+            this.constructionComboBox.Text = "Select a Product";
             // 
             // constructionButton
             // 
@@ -235,9 +238,10 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(22, 13);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(288, 78);
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 

@@ -15,21 +15,25 @@ namespace QuoteGenerator
             InitializeComponent();
         }
 
-        
+        //Declare a variable to be assigned later indicating the type of product.
         string type = "";
-        const int totalNumberOfQuotes = 25;
-        string[,] results = new string[totalNumberOfQuotes, 10];
-        int quoteNum = 0;
-        
+        //Declare a constant to be the number of records in the results[,] array
+        const int TOTAL_NUM_OF_QUOTES = 25;
 
+        //Declare results multidimensional array which will store all quotes from the program instance in memory, to be saved when quoting is complete.
+        string[,] results = new string[TOTAL_NUM_OF_QUOTES, 10];
+        //statring point for the results array; when a quote is generated it will be saved a the results[quoteNum] index
+        int quoteNum = 0;
         private void constructionComboBox_Click(object sender, EventArgs e)
         {
+            //This method shows which text boxes and labels the program should show the user, based on which bag is selected. Try Cath statements are used to catch a null reference.
             try
             {
                 //Sets the .Visible property of all the text boxts to whatever boolean value is passed throught the method.
                 TextBoxVisible(true);
                 //Clears the values the .Text properties of all text boxes onthe form.
                 ClearText();
+                outputLabel.Text = "";
 
                 //switch statement turns off irrelevant boxes and labels for the bagConstruction
                 switch (constructionComboBox.SelectedItem.ToString())
@@ -97,6 +101,7 @@ namespace QuoteGenerator
                 //time the button is clicked, and is only accessed from within the click button method so I've declared it 
                 //within the method instead of outside the method.
                 dataStrings = GetItemData();
+                //This Arr.ConvertAll method uses a custom method at the bottom of this file that turns all string records in an array to doubles.
                 data = Array.ConvertAll(dataStrings, new Converter<string, double>(StringToDouble));
 
 
@@ -110,12 +115,12 @@ namespace QuoteGenerator
 
                 //Convert data[] array to variable Strings for both outputText, and results[] arrya
                 string width, gusset, length, lip, mil, qty, price, totalSale;
-                width = data[0].ToString();
-                gusset = data[1].ToString();
-                length = data[2].ToString();
-                lip = data[3].ToString();
-                mil = (data[4] / 1000).ToString();
-                qty = data[5].ToString();
+                width = dataStrings[0];
+                gusset = dataStrings[1];
+                length = dataStrings[2];
+                lip = dataStrings[3];
+                mil = (Convert.ToDouble(dataStrings[4]) / 1000).ToString();
+                qty = dataStrings[5];
                 price = priceNum.ToString("C");
 
 
@@ -185,9 +190,7 @@ namespace QuoteGenerator
             {
                 outputLabel.Text = "Whoops! You need to put numbers in all of the required fields to the left.";
             }
-        }
-
-        
+        }     
         private string[] GetItemData()
         {
             /*This Method grabs all the user data and returns it as an array to be passed into either of the calculator methods
@@ -211,9 +214,7 @@ namespace QuoteGenerator
             qty = quantityTextBox.Text;
             string[] itemDataStrings = new string[6] { width, gusset, length, lip, mil, qty };
             return itemDataStrings;
-        }
-
-        
+        }        
         private double BagCalculator(double[] itemData)
         {
             //Calculator for if the item is a bag.
@@ -226,8 +227,7 @@ namespace QuoteGenerator
             qty = itemData[5];
             double totalWeight = ((width + gusset) * (length + lip) * mil) / 15000 * qty;
             return totalWeight;
-        }
-        
+        }        
         private double RollCalculator(double[] itemData)
         {
             //Calculator for if the item is a roll
@@ -241,27 +241,25 @@ namespace QuoteGenerator
             double totalWeight = ((width + gusset) * length * mil * 12) / 15000 * qty;
             return totalWeight;
         }
-
-        //Method that takes the quote results and sends them to the results[,] array
         private void SendToResults(string[] quoteData)
         {
-            for(int itemRecord = 0; itemRecord < quoteData.Length; ++itemRecord)
+            //Method that takes the quote results and sends them to the results[,] array
+            for (int itemRecord = 0; itemRecord < quoteData.Length; ++itemRecord)
             {
                 results[quoteNum, itemRecord] = quoteData[itemRecord];
             }
 
         }
-
-        //Event Method to save the array to a txt file.
         private void saveQuotesButton_Click(object sender, EventArgs e)
         {
+            //Event Method to save the array to a txt file.
             saveFileDialog.ShowDialog();
             string path = saveFileDialog.FileName;
 
             FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(fs);
 
-            for(int quoteNum = 0; quoteNum < totalNumberOfQuotes; ++quoteNum)
+            for(int quoteNum = 0; quoteNum < TOTAL_NUM_OF_QUOTES; ++quoteNum)
             {
                 if (results[quoteNum, 0] != null) 
                 {
@@ -284,6 +282,7 @@ namespace QuoteGenerator
         }
         private void ClearText()
         {
+            //Clears the data from all text boxes
             widthTextBox.Text = "";
             lengthTextBox.Text = "";
             gussetTextBox.Text = "";
@@ -294,6 +293,7 @@ namespace QuoteGenerator
         }
         private void TextBoxVisible(bool vis)
         {
+            //Sets all .Visible values to the boolean value passed through the method
             quoteButton.Visible = vis;
             widthTextBox.Visible = vis;
             widthLabel.Visible = vis;
@@ -312,18 +312,21 @@ namespace QuoteGenerator
         }
         private void HideGussetControls()
         {
+            //hides gusset controls, and sets the text box value to 0. This prevents a false Null Response exception, while notinterfering with the calculator formulas since the gusset is added to the width.
             gussetTextBox.Visible = false;
             gussetTextBox.Text = "0";
             gussetLabel.Visible = false;
         }
         private void HideLipControls()
         {
+            //hides lip controls and sets the text box to 0 for the same reason as the gusset box being set to zero.
             lipTextBox.Visible = false;
             lipTextBox.Text = "0";
             lipLabel.Visible = false;
         }
         public static double StringToDouble(string input)
         {
+            //Converter method to convert strings in an array to doubles. 
             double output = Convert.ToDouble(input);
             return output;
         }
